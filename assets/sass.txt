@@ -1,0 +1,7 @@
+sass --watch C:\Users\Admin\Dropbox\Iqbal\futexo\assets\scss\main.scss:C:\Users\Admin\Dropbox\Iqbal\futexo\assets\css\style.css
+
+
+
+transform: scale(-1) rotate(180deg);
+
+
