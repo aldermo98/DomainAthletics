@@ -3,9 +3,9 @@
         event.preventDefault(); // Prevent the form from submitting normally
     
         // Get the form values
-        const heightFt = parseFloat(document.querySelector('input[name="height-ft"]').value);
-        const heightIn = parseFloat(document.querySelector('input[name="height-in"]').value);
-        const weightLbs = parseFloat(document.querySelector('input[name="weight-lbs"]').value);
+        const heightFt = parseFloat(document.querySelector('input[name="height-ft"]').value) || 0;
+        const heightIn = parseFloat(document.querySelector('input[name="height-in"]').value) || 0;
+        const weightLbs = parseFloat(document.querySelector('input[name="weight-lbs"]').value) || 0;
         const gender = document.querySelector('select[name="gender"]').value;
         const age = parseInt(document.querySelector('input[name="age"]').value);
     
