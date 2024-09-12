@@ -1200,6 +1200,7 @@ textarea:focus {
   -moz-transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   z-index: 9999;
+  background-color: #152136;
 }
 @media (max-width: 575px) {
   .sidebar__area {
@@ -1735,9 +1736,15 @@ textarea:focus {
 /*  04. Features CSS
 /*----------------------------------------*/
 .tpfeatures-lists {
+  height: 100px;
   margin-top: -100px;
   position: relative;
   z-index: 9;
+}
+@media (max-width: 768px) {
+  .tpfeatures-lists {
+    height: 100%;
+  } 
 }
 
 .tp-features-item {
@@ -2357,7 +2364,6 @@ textarea:focus {
 
 .choose-us-area {
   margin-right: 7%;
-  margin-top: -185px;
   position: relative;
   background: #ffffff;
 }
@@ -2685,11 +2691,16 @@ textarea:focus {
 /*  06. Services CSS
 /*----------------------------------------*/
 .services-list {
-  padding-top: 115px;
+  padding-top: 300px;
   padding-bottom: 340px;
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+}
+@media (max-width: 768px) {
+  .services-list {
+    padding-top: 200px;
+  }
 }
 
 .services-item {
@@ -2705,7 +2716,7 @@ textarea:focus {
     padding: 0 30px;
   }
 }
-.services-item:hover {
+.services-item:hover, .services-item.active {
   background: #ea1b29;
 }
 
@@ -2738,10 +2749,10 @@ textarea:focus {
   display: inline-block;
 }
 
-.services-item:hover .services-icon {
+.services-item:hover .services-icon, .services-item.active .services-icon {
   background: #ffffff;
 }
-.services-item:hover .services-icon i {
+.services-item:hover .services-icon i, .services-item.active .services-icon i {
   color: #ea1b29;
   transform: rotateY(360deg);
 }
@@ -2751,7 +2762,7 @@ textarea:focus {
   display: inline-block;
 }
 
-.services-item:hover .sv-inner::after {
+.services-item:hover .sv-inner::after, .services-item.active .sv-inner::after {
   background: #f0606a;
 }
 
@@ -2907,6 +2918,7 @@ textarea:focus {
 
 .testimonial-area {
   margin-top: -200px;
+  margin-bottom: 40px;
 }
 
 .testimonial-area-two {
