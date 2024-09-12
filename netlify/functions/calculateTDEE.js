@@ -39,7 +39,7 @@ exports.handler = async (req, context) => {
         const fetch = await import('node-fetch').then(mod => mod.default);
 
         // Update HighLevel contact with the TDEE value
-        const highLevelApiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6ImhNTmRCOWo2RzFwT2pPOGlQTFNQIiwidmVyc2lvbiI6MSwiaWF0IjoxNzI2MDg0ODExMDE1LCJzdWIiOiJ5UE1ENFUwR1dnMUhwMkJhTTQ5RiJ9.oYMwCZ2pZ4LkgDvM278wJFMStA8H1-q9JvmOfZSfN-A'; // Replace with your actual HighLevel API key
+        const highLevelApiKey = 'pit-f8685afc-07c4-480d-9e81-6deca0bb2f31'; // Replace with your actual HighLevel API key
         const highLevelUpdateUrl = `https://services.leadconnectorhq.com/contacts/${contactId}`;
 
         const response = await fetch(highLevelUpdateUrl, {
