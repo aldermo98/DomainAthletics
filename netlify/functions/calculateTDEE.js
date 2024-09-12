@@ -30,7 +30,8 @@ function calculateTDEE(gender, age, height_ft, height_in, weight_lbs, activityLe
 
 exports.handler = async (req, context) => {
     try {
-        const { gender, age, weight_lbs, height_ft, height_in, activityLevel, contactId } = req.body.customData;
+        const data = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+        const { gender, age, weight_lbs, height_ft, height_in, activityLevel, contactId } = data.customData;
 
         const calculatedValues = calculateTDEE(gender, parseInt(age), parseInt(height_ft), parseInt(height_in), parseFloat(weight_lbs), activityLevel);
 
