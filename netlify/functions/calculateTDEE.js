@@ -1,14 +1,18 @@
 // .netlify/functions/calculateTDEE.js
-const fetch = require('node-fetch');
 
 // Helper function to calculate TDEE
 function calculateTDEE(gender, age, height_ft, height_in, weight_lbs, activityLevel) {
-    // Calculate BMI
+    // Calculate total height in inches and convert to meters
     const heightTotalInches = (height_ft * 12) + height_in;
     const heightMeters = heightTotalInches * 0.0254;
+    
+    // Convert weight to kg
     const weightKg = weight_lbs * 0.453592;
+    
+    // Calculate BMI
     const bmi = weightKg / (heightMeters * heightMeters);
-    const isMale = gender == "Male";
+    
+    const isMale = gender === "Male";
 
     const activityMultipliers = {
         'Sedentary (Office job)': 1.2,
@@ -20,8 +24,8 @@ function calculateTDEE(gender, age, height_ft, height_in, weight_lbs, activityLe
 
     // Calculate BMR and TDEE
     const bmr = 10 * weightKg + 6.25 * (heightMeters * 100) - 5 * age + (isMale ? 5 : -161);
-    const tdee = bmr * (activityMultipliers[activityLevel] || 1.2); // Default to sedentary
-    return {bmi, tdee};
+    const tdee = bmr * (activityMultipliers[activityLevel] || 1.2); // Default to sedentary if no match
+    return { bmi, tdee };
 }
 
 exports.handler = async (req, context) => {
@@ -29,10 +33,13 @@ exports.handler = async (req, context) => {
         const data = JSON.parse(req.body);
         const { gender, age, weight_lbs, height_ft, height_in, activityLevel, contactId } = data;
 
-        const calculatedValues = calculateTDEE(gender, age, weight_lbs, height_ft, height_in, activityLevel);
+        const calculatedValues = calculateTDEE(gender, age, height_ft, height_in, weight_lbs, activityLevel);
+
+        // Dynamically import node-fetch
+        const fetch = await import('node-fetch').then(mod => mod.default);
 
         // Update HighLevel contact with the TDEE value
-        const highLevelApiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6ImhNTmRCOWo2RzFwT2pPOGlQTFNQIiwidmVyc2lvbiI6MSwiaWF0IjoxNzI2MDg0ODExMDE1LCJzdWIiOiJ5UE1ENFUwR1dnMUhwMkJhTTQ5RiJ9.oYMwCZ2pZ4LkgDvM278wJFMStA8H1-q9JvmOfZSfN-A';
+        const highLevelApiKey = 'your-highlevel-api-key'; // Replace with your actual HighLevel API key
         const highLevelUpdateUrl = `https://rest.gohighlevel.com/v1/contacts/${contactId}`;
 
         const response = await fetch(highLevelUpdateUrl, {
@@ -59,7 +66,7 @@ exports.handler = async (req, context) => {
         // Return success response
         return {
             statusCode: 200,
-            body: JSON.stringify({ message: 'TDEE calculated and updated successfully', tdee })
+            body: JSON.stringify({ message: 'TDEE calculated and updated successfully', tdee: calculatedValues.tdee })
         };
 
     } catch (error) {
