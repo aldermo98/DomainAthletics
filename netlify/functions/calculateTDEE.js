@@ -25,7 +25,7 @@ function calculateTDEE(gender, age, height_ft, height_in, weight_lbs, activityLe
     // Calculate BMR and TDEE
     const bmr = 10 * weightKg + 6.25 * (heightMeters * 100) - 5 * age + (isMale ? 5 : -161);
     const tdee = bmr * (activityMultipliers[activityLevel] || 1.2); // Default to sedentary if no match
-    return { bmi, tdee };
+    return { bmi: bmi, tdee: tdee };
 }
 
 exports.handler = async (req, context) => {
