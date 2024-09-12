@@ -33,7 +33,7 @@ exports.handler = async (req, context) => {
         const data = JSON.parse(req.body);
         const { gender, age, weight_lbs, height_ft, height_in, activityLevel, contactId } = data;
 
-        const calculatedValues = calculateTDEE(gender, age, height_ft, height_in, weight_lbs, activityLevel);
+        const calculatedValues = calculateTDEE(gender, parseInt(age), parseInt(height_ft), parseInt(height_in), parseFloat(weight_lbs), activityLevel);
 
         // Dynamically import node-fetch
         const fetch = await import('node-fetch').then(mod => mod.default);
