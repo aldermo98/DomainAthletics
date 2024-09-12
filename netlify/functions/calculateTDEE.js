@@ -40,19 +40,25 @@ exports.handler = async (req, context) => {
 
         // Update HighLevel contact with the TDEE value
         const highLevelApiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2NhdGlvbl9pZCI6ImhNTmRCOWo2RzFwT2pPOGlQTFNQIiwidmVyc2lvbiI6MSwiaWF0IjoxNzI2MDg0ODExMDE1LCJzdWIiOiJ5UE1ENFUwR1dnMUhwMkJhTTQ5RiJ9.oYMwCZ2pZ4LkgDvM278wJFMStA8H1-q9JvmOfZSfN-A'; // Replace with your actual HighLevel API key
-        const highLevelUpdateUrl = `https://rest.gohighlevel.com/v1/contacts/${contactId}`;
+        const highLevelUpdateUrl = `https://services.leadconnectorhq.com/contacts/${contactId}`;
 
         const response = await fetch(highLevelUpdateUrl, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${highLevelApiKey}`
+                'Authorization': `Bearer ${highLevelApiKey}`,
+                'Version': '2021-07-28'
             },
             body: JSON.stringify({
-                customField: {
-                    bmi: calculatedValues.bmi,
-                    tdee: calculatedValues.tdee
-                }
+                customFields: [
+                    {
+                        id: "cwcN41At0c69w6ThqNVt",
+                        value: calculatedValues.bmi
+                    },{
+                        id: "ScThEg1uIelu6oZHkjPm",
+                        value: calculatedValues.tdee
+                    }
+                ]
             })
         });
 
