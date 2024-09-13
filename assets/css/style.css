@@ -1527,7 +1527,7 @@ textarea:focus {
   padding: 350px 0px 290px;
   z-index: 11;
   position: relative;
-  margin-left: 240px;
+  margin-left: 40px;
   overflow: hidden;
 }
 @media only screen and (min-width: 1200px) and (max-width: 1399px) {
@@ -1578,27 +1578,40 @@ textarea:focus {
   }
 }
 
+.video-wrapper{
+  z-index: 11;
+  align-content: center;
+}
+
+.video-wrapper video{
+  width: 100%;
+  max-width: 800px;
+}
+
+.title-wrapper{
+  margin-bottom: 30px;
+}
+
 .hero-title {
-  font-size: 150px;
+  font-size: 91px;
   line-height: 1;
   color: #ffffff;
   text-transform: uppercase;
   font-weight: 600;
-  margin-bottom: 0;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .hero-title {
-    font-size: 100px;
+    font-size: 91px;
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .hero-title {
-    font-size: 80px;
+    font-size: 61px;
   }
 }
 @media (max-width: 575px) {
   .hero-title {
-    font-size: 56px;
+    font-size: 50px;
   }
 }
 
